@@ -34,11 +34,11 @@ module ActiveSupport
       # implementations.  If options is a symbol, top level
       # CascadeStore options are used for cascaded stores. If options
       # is an array, they are passed on unchanged.
-      def initialize(options = nil, &blk)
+      def initialize(*options)
         options ||= {}
         super(options)
         @monitor = Monitor.new
-        store_options = options.delete(:stores) || []
+        store_options = options.first[:stores] || []
         @stores = store_options.map do |o|
           o = o.is_a?(Symbol) ? [o, options] : o
           ActiveSupport::Cache.lookup_store(*o)
