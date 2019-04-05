@@ -40,7 +40,7 @@ module ActiveSupport
         @monitor = Monitor.new
         store_options = options.first[:stores] || []
         @stores = store_options.map do |o|
-          o = o.is_a?(Symbol) ? [o, options] : o
+          o = o.is_a?(Symbol) ? [o, options[1..-1] : o
           ActiveSupport::Cache.lookup_store(*o)
         end
       end
