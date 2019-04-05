@@ -61,12 +61,18 @@ module ActiveSupport
       end
       
       def read(key)
+        if key.is_a?(Array)
+          key = key.first
+        end
         Rails.logger.info "Memcached Hotkey Reading: #{key}"
         Rails.logger.info caller
         cascade(:read, key)
       end
 
       def fetch(key)
+        if key.is_a?(Array)
+          key = key.first
+        end
         Rails.logger.info "Memcached Hotkey Fetching: #{key}"
         Rails.logger.info caller
         cascade(:fetch, key)
