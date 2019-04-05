@@ -60,16 +60,16 @@ module ActiveSupport
         nil
       end
       
-      def read(key, options)
-        Rails.logger.info "Memcached Hotkey Reading: #{name}"
+      def read(key)
+        Rails.logger.info "Memcached Hotkey Reading: #{key}"
         Rails.logger.info caller
-        cascade(:read, key, options)
+        cascade(:read, key)
       end
 
-      def fetch(key, options)
-        Rails.logger.info "Memcached Hotkey Fetching: #{name}"
+      def fetch(key)
+        Rails.logger.info "Memcached Hotkey Fetching: #{key}"
         Rails.logger.info caller
-        cascade(:fetch, key, options)
+        cascade(:fetch, key)
       end
       
       protected
