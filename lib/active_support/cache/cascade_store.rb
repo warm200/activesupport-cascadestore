@@ -59,7 +59,19 @@ module ActiveSupport
         cascade(:delete_matched, matcher, options)
         nil
       end
+      
+      def read(key, options)
+        Rails.logger.info "Memcached Hotkey Reading: #{name}"
+        Rails.logger.info caller
+        cascade(:read, key, options)
+      end
 
+      def fetch(key, options)
+        Rails.logger.info "Memcached Hotkey Fetching: #{name}"
+        Rails.logger.info caller
+        cascade(:fetch, key, options)
+      end
+      
       protected
       def synchronize(&block) # :nodoc:
         @monitor.synchronize(&block)
@@ -81,18 +93,6 @@ module ActiveSupport
           end
         end
         entry
-      end
-      
-      def read(key, options)
-        Rails.logger.info "Memcached Hotkey Reading: #{name}"
-        Rails.logger.info caller
-        cascade(:read, key, options)
-      end
-
-      def fetch(key, options)
-        Rails.logger.info "Memcached Hotkey Fetching: #{name}"
-        Rails.logger.info caller
-        cascade(:fetch, key, options)
       end
       
       def write_entry(key, entry, options) # :nodoc:
