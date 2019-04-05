@@ -82,7 +82,19 @@ module ActiveSupport
         end
         entry
       end
+      
+      def read(key, options)
+        Rails.logger.info "Memcached Hotkey Reading: #{name}"
+        Rails.logger.info caller
+        cascade(:read, key, options)
+      end
 
+      def fetch(key, options)
+        Rails.logger.info "Memcached Hotkey Fetching: #{name}"
+        Rails.logger.info caller
+        cascade(:fetch, key, options)
+      end
+      
       def write_entry(key, entry, options) # :nodoc:
         cascade(:write_entry, key, entry, options)
         true
