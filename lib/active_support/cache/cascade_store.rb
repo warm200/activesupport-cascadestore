@@ -36,11 +36,12 @@ module ActiveSupport
       # is an array, they are passed on unchanged.
       def initialize(*options)
         options ||= {}
-        super(options)
+        
         @monitor = Monitor.new
         @stores = options.first[:stores]
         store_options = options.first[:stores] || []
         options[0] = store_options.first
+        super(options)
         ActiveSupport::Cache.lookup_store(*options)
       end
 
