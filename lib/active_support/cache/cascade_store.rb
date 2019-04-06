@@ -39,10 +39,8 @@ module ActiveSupport
         super(options)
         @monitor = Monitor.new
         store_options = options.first[:stores] || []
-        @stores = store_options.map do |o|
-          o = o.is_a?(Symbol) ? [o, options[1..-1]] : o
-          ActiveSupport::Cache.lookup_store(*o)
-        end
+        options[0] = store_options.first
+        ActiveSupport::Cache.lookup_store(*options)
       end
 
       def increment(name, amount = 1, options = nil)
