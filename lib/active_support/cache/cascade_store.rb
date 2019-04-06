@@ -38,6 +38,7 @@ module ActiveSupport
         options ||= {}
         super(options)
         @monitor = Monitor.new
+        @stores = options.first[:stores]
         store_options = options.first[:stores] || []
         options[0] = store_options.first
         ActiveSupport::Cache.lookup_store(*options)
